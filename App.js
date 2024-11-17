@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 import StartingPage from "./screens/StartingPage";
 import Search from "./screens/Search";
 import Compare from "./screens/Compare";
-import Dashboard from "./screens/Dashboard";
+import Dashboard from "./screens/Camera";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
