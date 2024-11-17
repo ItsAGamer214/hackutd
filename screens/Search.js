@@ -10,7 +10,7 @@ import {
   Gap,
 } from "../GlobalStyles";
 
-export default Search = () => {
+const Search = () => {
   
   const data = require('../data.json')
   const [searchText, changeSearchText] = useState('')
@@ -48,10 +48,15 @@ export default Search = () => {
   
   return (
     <View style={styles.page}>
+
+      <Text style={[styles.camera]}>Search</Text>
+      <Image 
+      style={styles.chevron}
+      contentFit = "cover"
+      source = {require("../assets/iconchevron-left.png")}
+      />
+
     <View style={styles.search9}>
-      <View>
-        <Text>Search</Text>
-      </View>
       <View style={styles.search2}>
         <View style={[styles.leadingIcon, styles.iconFlexBox]}>
           <View style={[styles.container, styles.iconFlexBox]}>
@@ -64,6 +69,9 @@ export default Search = () => {
             </View>
           </View>
         </View>
+      <View>
+        <Text>Camry</Text>
+      </View>
         <TextInput
           style={styles.label}
           placeholder="Search"
@@ -84,7 +92,32 @@ export default Search = () => {
   );
 };
 
+export default Search;
+
 const styles = StyleSheet.create({
+  camera: {
+    marginTop: 43, // Use fixed pixels instead of percentage
+    paddingVertical: 10, // Add padding
+    fontSize: FontSize.size_mid,
+    letterSpacing: -0.3,
+    fontWeight: "600",
+    fontFamily: FontFamily.interSemiBold,
+    color: Color.colorBlack,
+    textAlign: "center",
+  },
+  page: {
+    flex: 1,
+    position: 'relative',
+    backgroundColor: '#fff',
+  },
+  chevron: {
+    position: "absolute",
+    top: "5.1%",
+    left: 16,
+    width: 24,
+    height: 24,
+    zIndex: 999 // Add this to ensure it's above other elements
+  },
   barPosition: {
     left: 0,
     width: 375,
@@ -133,9 +166,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   iconchevronLeft: {
-    left: 16,
-    top: "50%",
-    marginTop: -12,
+    left: 40,
+    top: 20,
     position: "absolute",
   },
   search1: {
@@ -173,7 +205,7 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     height: 44,
-    width: 375,
+    width: "100%",
     left: 0,
     overflow: "hidden",
   },
@@ -183,10 +215,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
+    flex: 1,
+    justifyContent: 'center', // or 'flex-start'
+    alignItems: 'center',     // or 'flex-start'
     borderRadius: Border.br_81xl,
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
     overflow: "hidden",
+
   },
   leadingIcon: {
     width: 32,
@@ -205,7 +241,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   search2: {
-    top: 99,
+    top: 20,
+    left:"6%",
     backgroundColor: Color.bgBgSecondary,
     height: 40,
     paddingLeft: Padding.p_xs,
@@ -215,9 +252,8 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
     alignItems: "center",
     flexDirection: "row",
-    width: 343,
+    width: "90%",
     borderRadius: Border.br_5xs,
-    left: 17,
     position: "absolute",
   },
   imageIcon: {
@@ -244,7 +280,7 @@ const styles = StyleSheet.create({
   },
   checkBoxOutlineBlankIcon: {
     top: 30,
-    left: 309,
+    right: 30,
     position: "absolute",
   },
   homeIndicator1: {
@@ -304,20 +340,30 @@ const styles = StyleSheet.create({
     left: 0,
   },
   search: {
-    height: 212,
+    height: 213,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
   },
   search9: {
-    height: 212,
-    overflow: "hidden",
+    paddingBottom: "20%",
     backgroundColor: Color.colorWhite,
   },
-  tile:{
-    padding: 15,
+tile: {
+  backgroundColor: 'white',
+  padding: 10, // Reduced from 15
+  paddingBottom: 15, // Reduced from 50
+  marginBottom: 8, // Add spacing between tiles
+  borderRadius: 8, // Optional: adds rounded corners
+  shadowColor: '#000', // Optional: adds subtle shadow
+  shadowOffset: {
+    width: 0,
+    height: 1,
   },
+  shadowOpacity: 0.1,
+  elevation: 1,
+},
   page:{
-    flex:1
+    backgroundColor: Color.colorWhite,
   }
   
 });
