@@ -90,7 +90,7 @@ const StartingPage = () => {
       </View>
 
       <View style={[styles.button, styles.buttonShadowBox]}>
-        <Text style={[styles.search]}>Search</Text>
+        <Text style={[styles.search2]}>Search</Text>
       </View>
     </View>
   );
@@ -210,6 +210,22 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     overflow: "hidden",
+  },
+  search2: {
+    top: "41%",
+    width: "90%",
+    paddingLeft: Padding.p_xs,
+    paddingTop: Padding.p_5xs,
+    paddingRight: Padding.p_base,
+    gap: Gap.gap_md,
+    paddingBottom: Padding.p_5xs,
+    backgroundColor: Color.bgBgSecondary,
+    alignItems: "center",
+    flexDirection: "row",
+    height: 50,
+    borderRadius: Border.br_5xs,
+    left: "5%",
+    position: "absolute",
   },
   search: {
     top: "41%",
