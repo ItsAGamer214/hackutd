@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Image } from "expo-image";
-import { StyleSheet, TextInput, View, ScrollView, Text} from "react-native";
+import { StyleSheet, TextInput, View, ScrollView, Text } from "react-native";
 import {
   FontFamily,
   Padding,
@@ -10,30 +10,97 @@ import {
   Gap,
 } from "../GlobalStyles";
 
-const Search = () => {
-  
-  const data = require('../data.json')
-  const [searchText, changeSearchText] = useState('')
-  const filteredData = data.filter(item => item.Model.toLowerCase().includes(searchText.toLowerCase()) || item.Class.toLowerCase().includes(searchText.toLowerCase()));
+export default Search = ({ route }) => {
+  const data = require("../data.json");
+  const [searchText, changeSearchText] = useState("");
 
-  function carArr(){
-    return filteredData.map(item => <CarTile carData={item}/>)
+  // Initialize search from route params when component mounts
+  useEffect(() => {
+    if (route.params?.searchParams) {
+      const {
+        query,
+        model,
+        year,
+        class: vehicleClass,
+        mpg,
+      } = route.params.searchParams;
+      // Set initial search text from the query parameter
+      changeSearchText(query || "");
+    }
+  }, [route.params]);
+
+  // Enhanced filter function that considers all search parameters
+  const filteredData = data.filter((item) => {
+    if (route.params?.searchParams) {
+      const {
+        model,
+        year,
+        class: vehicleClass,
+        mpg,
+      } = route.params.searchParams;
+
+      // Basic text search
+      const matchesSearch =
+        searchText === "" ||
+        item.Model.toLowerCase().includes(searchText.toLowerCase()) ||
+        item.Class.toLowerCase().includes(searchText.toLowerCase());
+
+      // Additional filter conditions
+      const matchesModel =
+        !model || item.Model.toLowerCase().includes(model.toLowerCase());
+
+      const matchesYear = !year || item.Year.toString() === year;
+
+      const matchesClass =
+        !vehicleClass ||
+        item.Class.toLowerCase().includes(vehicleClass.toLowerCase());
+
+      const matchesMpg =
+        !mpg || (item.MPG_City && item.MPG_City.toString() >= mpg);
+
+      return (
+        matchesSearch &&
+        matchesModel &&
+        matchesYear &&
+        matchesClass &&
+        matchesMpg
+      );
+    }
+
+    // If no search parameters, use original filter logic
+    return (
+      item.Model.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.Class.toLowerCase().includes(searchText.toLowerCase())
+    );
+  });
+
+  // Rest of your component remains the same
+  function carArr() {
+    return filteredData.map((item, index) => (
+      <CarTile key={index} carData={item} />
+    ));
   }
-  const CarTile=({carData})=>{
-    return(
-    <View style={styles.tile}>
+
+  const CarTile = ({ carData }) => {
+    // Your existing CarTile component remains the same
+    return (
+      <View style={styles.tile}>
         <Image
           style={[styles.imageIcon, styles.itemLayout]}
           source={require("../assets/image.png")}
         />
         <View style={[styles.info, styles.infoPosition]}>
-          <Text style={[styles.camry86, styles.camry86FlexBox]}>{carData.Model}</Text>
-          <Text style={[styles.year2028, styles.camry86FlexBox]}>{'Year: ' + carData.Year}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}>{'Class: ' + carData.Class}
+          <Text style={[styles.camry86, styles.camry86FlexBox]}>
+            {carData.Model}
           </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}>{'MPG: '+ carData.MPG_City}
+          <Text style={[styles.year2028, styles.camry86FlexBox]}>
+            {"Year: " + carData.Year}
+          </Text>
+          <Text style={[styles.year2028, styles.camry86FlexBox]}>
+            {"Class: " + carData.Class}
+          </Text>
+          <Text style={[styles.year2028, styles.camry86FlexBox]}>
+            {"MPG: " + carData.MPG_City}
           </Text>
         </View>
         <Image
@@ -42,82 +109,46 @@ const Search = () => {
           source={require("../assets/check-box-outline-blank.png")}
         />
       </View>
-    )
-  }
+    );
+  };
 
-  
   return (
     <View style={styles.page}>
-
-      <Text style={[styles.camera]}>Search</Text>
-      <Image 
-      style={styles.chevron}
-      contentFit = "cover"
-      source = {require("../assets/iconchevron-left.png")}
-      />
-
-    <View style={styles.search9}>
-      <View style={styles.search2}>
-        <View style={[styles.leadingIcon, styles.iconFlexBox]}>
-          <View style={[styles.container, styles.iconFlexBox]}>
-            <View style={[styles.stateLayer, styles.iconFlexBox]}>
-              <Image
-                style={styles.iconLayout}
-                contentFit="cover"
-                source={require("../assets/icon.png")}
-              />
+      <View style={styles.search9}>
+        <View>
+          <Text>Search</Text>
+        </View>
+        <View style={styles.search2}>
+          <View style={[styles.leadingIcon, styles.iconFlexBox]}>
+            <View style={[styles.container, styles.iconFlexBox]}>
+              <View style={[styles.stateLayer, styles.iconFlexBox]}>
+                <Image
+                  style={styles.iconLayout}
+                  contentFit="cover"
+                  source={require("../assets/icon.png")}
+                />
+              </View>
             </View>
           </View>
+          <TextInput
+            style={styles.label}
+            placeholder="Search"
+            onChangeText={changeSearchText}
+            value={searchText}
+          />
+          <Image
+            style={[styles.searchIcon, styles.iconLayout]}
+            contentFit="cover"
+            source={require("../assets/search.png")}
+          />
         </View>
-      <View>
-        <Text>Camry</Text>
       </View>
-        <TextInput
-          style={styles.label}
-          placeholder="Search"
-          onChangeText={changeSearchText}
-          value={searchText}
-        />
-        <Image
-          style={[styles.searchIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/search.png")}
-        />
-    </View>
-    </View>
-    <ScrollView style={styles.scrollView}>
-      {carArr()}
-    </ScrollView>
+      <ScrollView style={styles.scrollView}>{carArr()}</ScrollView>
     </View>
   );
 };
 
-export default Search;
-
 const styles = StyleSheet.create({
-  camera: {
-    marginTop: 43, // Use fixed pixels instead of percentage
-    paddingVertical: 10, // Add padding
-    fontSize: FontSize.size_mid,
-    letterSpacing: -0.3,
-    fontWeight: "600",
-    fontFamily: FontFamily.interSemiBold,
-    color: Color.colorBlack,
-    textAlign: "center",
-  },
-  page: {
-    flex: 1,
-    position: 'relative',
-    backgroundColor: '#fff',
-  },
-  chevron: {
-    position: "absolute",
-    top: "5.1%",
-    left: 16,
-    width: 24,
-    height: 24,
-    zIndex: 999 // Add this to ensure it's above other elements
-  },
   barPosition: {
     left: 0,
     width: 375,
@@ -166,8 +197,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   iconchevronLeft: {
-    left: 40,
-    top: 20,
+    left: 16,
+    top: "50%",
+    marginTop: -12,
     position: "absolute",
   },
   search1: {
@@ -205,7 +237,7 @@ const styles = StyleSheet.create({
   },
   statusBar: {
     height: 44,
-    width: "100%",
+    width: 375,
     left: 0,
     overflow: "hidden",
   },
@@ -215,14 +247,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container: {
-    flex: 1,
-    justifyContent: 'center', // or 'flex-start'
-    alignItems: 'center',     // or 'flex-start'
     borderRadius: Border.br_81xl,
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
     overflow: "hidden",
-
   },
   leadingIcon: {
     width: 32,
@@ -241,8 +269,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   search2: {
-    top: 20,
-    left:"6%",
+    top: 99,
     backgroundColor: Color.bgBgSecondary,
     height: 40,
     paddingLeft: Padding.p_xs,
@@ -252,8 +279,9 @@ const styles = StyleSheet.create({
     paddingBottom: Padding.p_5xs,
     alignItems: "center",
     flexDirection: "row",
-    width: "90%",
+    width: 343,
     borderRadius: Border.br_5xs,
+    left: 17,
     position: "absolute",
   },
   imageIcon: {
@@ -280,7 +308,7 @@ const styles = StyleSheet.create({
   },
   checkBoxOutlineBlankIcon: {
     top: 30,
-    right: 30,
+    left: 309,
     position: "absolute",
   },
   homeIndicator1: {
@@ -340,31 +368,19 @@ const styles = StyleSheet.create({
     left: 0,
   },
   search: {
-    height: 213,
+    height: 212,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
   },
   search9: {
-    paddingBottom: "20%",
+    height: 212,
+    overflow: "hidden",
     backgroundColor: Color.colorWhite,
   },
-tile: {
-  backgroundColor: 'white',
-  padding: 10, // Reduced from 15
-  paddingBottom: 15, // Reduced from 50
-  marginBottom: 8, // Add spacing between tiles
-  borderRadius: 8, // Optional: adds rounded corners
-  shadowColor: '#000', // Optional: adds subtle shadow
-  shadowOffset: {
-    width: 0,
-    height: 1,
+  tile: {
+    padding: 15,
   },
-  shadowOpacity: 0.1,
-  elevation: 1,
-},
-  page:{
-    backgroundColor: Color.colorWhite,
-  }
-  
+  page: {
+    flex: 1,
+  },
 });
-

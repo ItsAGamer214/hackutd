@@ -449,7 +449,7 @@ const styles = StyleSheet.create({
   lineIcon11: {
     maxHeight: "100%",
   },
-chart1: {
+  chart1: {
     top: 351,
     height: 282,
     width: 343,
@@ -460,7 +460,7 @@ chart1: {
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
     position: "relative", // Make sure this is also set
-},
+  },
   imageCarouselIcon: {
     height: 150,
     left: "4%",
@@ -503,14 +503,12 @@ chart1: {
     fontSize: FontSize.size_sm,
   },
   subheading: {
-
     lineHeight: 20,
     fontSize: FontSize.size_sm,
     fontFamily: FontFamily.presetsBody2,
     color: Color.textTextSecondary,
   },
   rating: {
-
     left: "2%",
     gap: Gap.gap_sm,
     alignItems: "center",

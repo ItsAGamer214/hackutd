@@ -1,6 +1,13 @@
-import * as React from "react";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   Padding,
   Color,
@@ -10,9 +17,40 @@ import {
   FontSize,
 } from "../GlobalStyles";
 
+const data = require("../data.json");
+
 const StartingPage = () => {
+  const navigation = useNavigation();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    model: "",
+    year: "",
+    class: "",
+    mpg: "",
+  });
+
+  const handleSearch = () => {
+    // Prepare search parameters
+    const searchParams = {
+      query: searchQuery,
+      ...filters,
+    };
+
+    // Navigate to search results page with parameters
+    navigation.navigate("Search", { searchParams });
+  };
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   return (
     <View style={styles.startingPage}>
+      {/* Search Bar */}
       <View style={styles.search}>
         <View style={[styles.leadingIcon, styles.iconFlexBox]}>
           <View style={[styles.container, styles.iconFlexBox]}>
@@ -25,73 +63,94 @@ const StartingPage = () => {
             </View>
           </View>
         </View>
-        <Text style={styles.label} numberOfLines={1}>
-          Model
-        </Text>
-        <Image
-          style={[styles.searchIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/search.png")}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Model"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
+        <TouchableOpacity onPress={handleSearch}>
+          <Image
+            style={[styles.searchIcon, styles.iconLayout]}
+            contentFit="cover"
+            source={require("../assets/search.png")}
+          />
+        </TouchableOpacity>
       </View>
-      <View style={styles.info}>
+
+      {/* Advanced Filters Toggle */}
+      <TouchableOpacity
+        style={styles.info}
+        onPress={() => setShowAdvancedFilters(!showAdvancedFilters)}
+      >
         <Text style={styles.advancedFilters}>Advanced Filters</Text>
         <Image
           style={[styles.iconchevronRight, styles.iconchevronLayout]}
           contentFit="cover"
           source={require("../assets/iconchevron-right.png")}
         />
-      </View>
+      </TouchableOpacity>
+
       <Image
         style={styles.image1Icon}
         contentFit="cover"
         source={require("../assets/image-1.png")}
       />
-      <View style={styles.checkoutInfo}>
-        <View style={[styles.shipping, styles.shippingBorder]}>
-          <Text style={styles.modelTypo}>MODEL</Text>
-          <View style={styles.info1}>
-            <Text style={styles.addShippingAddress}>Add shipping address</Text>
-            <Image
-              style={[styles.iconchevronRight1, styles.iconchevronLayout]}
-              contentFit="cover"
-              source={require("../assets/iconchevron-right1.png")}
-            />
-          </View>
-        </View>
-        <View style={[styles.delivery, styles.shippingBorder]}>
-          <Text style={styles.modelTypo}>YEAR</Text>
-          <View style={styles.info2}>
-            <View style={[styles.text, styles.textPosition]}>
-              <Text style={styles.text1}>2025</Text>
-            </View>
-            <Image
-              style={[styles.iconchevronRight1, styles.iconchevronLayout]}
-              contentFit="cover"
-              source={require("../assets/iconchevron-right2.png")}
-            />
-          </View>
-        </View>
-        <View style={styles.payment}>
-          <Text style={[styles.class, styles.classPosition]}>CLASS</Text>
-          <View style={[styles.info3, styles.classPosition]}>
-            <Text style={styles.text1}>Sedan</Text>
-            <Image
-              style={styles.iconchevronLayout}
-              contentFit="cover"
-              source={require("../assets/iconchevron-right2.png")}
-            />
-          </View>
-        </View>
-        <View style={styles.payment}>
-          <Text style={[styles.class, styles.classPosition]}>MPG</Text>
-          <View style={styles.search1} />
-        </View>
-      </View>
 
-      <View style={[styles.button, styles.buttonShadowBox]}>
-        <Text style={[styles.search2]}>Search</Text>
-      </View>
+      {/* Advanced Filters Section */}
+      {showAdvancedFilters && (
+        <View style={styles.checkoutInfo}>
+          <View style={[styles.shipping, styles.shippingBorder]}>
+            <Text style={styles.modelTypo}>MODEL</Text>
+            <TextInput
+              style={styles.filterInput}
+              value={filters.model}
+              onChangeText={(value) => handleFilterChange("model", value)}
+              placeholder="Enter model"
+            />
+          </View>
+
+          <View style={[styles.delivery, styles.shippingBorder]}>
+            <Text style={styles.modelTypo}>YEAR</Text>
+            <TextInput
+              style={styles.filterInput}
+              value={filters.year}
+              onChangeText={(value) => handleFilterChange("year", value)}
+              keyboardType="numeric"
+              placeholder="Enter year"
+            />
+          </View>
+
+          <View style={[styles.delivery, styles.shippingBorder]}>
+            <Text style={styles.modelTypo}>YEAR</Text>
+            <TextInput
+              style={styles.filterInput}
+              value={filters.class}
+              onChangeText={(value) => handleFilterChange("class", value)}
+              placeholder="Enter class"
+            />
+          </View>
+
+          <View style={[styles.delivery, styles.shippingBorder]}>
+            <Text style={styles.modelTypo}>MPG</Text>
+            <TextInput
+              style={styles.filterInput}
+              value={filters.mpg}
+              onChangeText={(value) => handleFilterChange("mpg", value)}
+              keyboardType="numeric"
+              placeholder="Enter MPG"
+            />
+          </View>
+        </View>
+      )}
+
+      {/* Search Button */}
+      <TouchableOpacity
+        style={[styles.button, styles.buttonShadowBox]}
+        onPress={handleSearch}
+      >
+        <Text style={styles.search2}>Search</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -147,6 +206,9 @@ const styles = StyleSheet.create({
     top: 647,
     height: 7,
     position: "absolute",
+  },
+  searchInput: {
+    left: "0%",
   },
   buttonShadowBox: {
     shadowOpacity: 1,
@@ -210,6 +272,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     overflow: "hidden",
+    left: "1000%",
   },
   search2: {
     top: "41%",
