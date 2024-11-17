@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, {useState} from "react";
 import { Image } from "expo-image";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, TextInput, View, ScrollView, Text} from "react-native";
 import {
   FontFamily,
   Padding,
@@ -10,9 +10,48 @@ import {
   Gap,
 } from "../GlobalStyles";
 
-const Search = () => {
+export default Search = () => {
+  
+  const data = require('../data.json')
+  const [searchText, changeSearchText] = useState('')
+  const filteredData = data.filter(item => item.Model.toLowerCase().includes(searchText.toLowerCase()) || item.Class.toLowerCase().includes(searchText.toLowerCase()));
+
+  function carArr(){
+    return filteredData.map(item => <CarTile carData={item}/>)
+  }
+  const CarTile=({carData})=>{
+    return(
+    <View style={styles.tile}>
+        <Image
+          style={[styles.imageIcon, styles.itemLayout]}
+          source={require("../assets/image.png")}
+        />
+        <View style={[styles.info, styles.infoPosition]}>
+          <Text style={[styles.camry86, styles.camry86FlexBox]}>{carData.Model}</Text>
+          <Text style={[styles.year2028, styles.camry86FlexBox]}>{'Year: ' + carData.Year}</Text>
+          <Text
+            style={[styles.year2028, styles.camry86FlexBox]}>{'Class: ' + carData.Class}
+          </Text>
+          <Text
+            style={[styles.year2028, styles.camry86FlexBox]}>{'MPG: '+ carData.MPG_City}
+          </Text>
+        </View>
+        <Image
+          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
+          contentFit="cover"
+          source={require("../assets/check-box-outline-blank.png")}
+        />
+      </View>
+    )
+  }
+
+  
   return (
-    <View style={styles.search}>
+    <View style={styles.page}>
+    <View style={styles.search9}>
+      <View>
+        <Text>Search</Text>
+      </View>
       <View style={styles.search2}>
         <View style={[styles.leadingIcon, styles.iconFlexBox]}>
           <View style={[styles.container, styles.iconFlexBox]}>
@@ -25,195 +64,22 @@ const Search = () => {
             </View>
           </View>
         </View>
-        <Text style={styles.label} numberOfLines={1}>
-          Camry
-        </Text>
+        <TextInput
+          style={styles.label}
+          placeholder="Search"
+          onChangeText={changeSearchText}
+          value={searchText}
+        />
         <Image
           style={[styles.searchIcon, styles.iconLayout]}
           contentFit="cover"
           source={require("../assets/search.png")}
         />
-      </View>
-      <View style={[styles.item, styles.itemLayout]}>
-        <Image
-          style={[styles.imageIcon, styles.itemLayout]}
-          contentFit="cover"
-          source={require("../assets/image.png")}
-        />
-        <View style={[styles.info, styles.infoPosition]}>
-          <Text
-            style={[styles.camry86, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >{`Camry ‘86 `}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Year: 2028
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Class: Sedan
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            MPG: 20
-          </Text>
-        </View>
-        <Image
-          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/check-box-outline-blank.png")}
-        />
-      </View>
-      <View style={[styles.item1, styles.itemLayout]}>
-        <Image
-          style={[styles.imageIcon, styles.itemLayout]}
-          contentFit="cover"
-          source={require("../assets/image.png")}
-        />
-        <View style={[styles.info, styles.infoPosition]}>
-          <Text
-            style={[styles.camry86, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >{`Camry ‘86 `}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Year: 2028
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Class: Sedan
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            MPG: 20
-          </Text>
-        </View>
-        <Image
-          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/check-box-outline-blank.png")}
-        />
-      </View>
-      <View style={[styles.item2, styles.itemLayout]}>
-        <Image
-          style={[styles.imageIcon, styles.itemLayout]}
-          contentFit="cover"
-          source={require("../assets/image.png")}
-        />
-        <View style={[styles.info, styles.infoPosition]}>
-          <Text
-            style={[styles.camry86, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >{`Camry ‘86 `}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Year: 2028
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Class: Sedan
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            MPG: 20
-          </Text>
-        </View>
-        <Image
-          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/check-box-outline-blank.png")}
-        />
-      </View>
-      <View style={[styles.item3, styles.itemLayout]}>
-        <Image
-          style={[styles.imageIcon, styles.itemLayout]}
-          contentFit="cover"
-          source={require("../assets/image.png")}
-        />
-        <View style={[styles.info, styles.infoPosition]}>
-          <Text
-            style={[styles.camry86, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >{`Camry ‘86 `}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Year: 2028
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Class: Sedan
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            MPG: 20
-          </Text>
-        </View>
-        <Image
-          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/check-box-outline-blank.png")}
-        />
-      </View>
-      <View style={[styles.item4, styles.itemLayout]}>
-        <Image
-          style={[styles.imageIcon, styles.itemLayout]}
-          contentFit="cover"
-          source={require("../assets/image.png")}
-        />
-        <View style={[styles.info, styles.infoPosition]}>
-          <Text
-            style={[styles.camry86, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >{`Camry ‘86 `}</Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Year: 2028
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            Class: Sedan
-          </Text>
-          <Text
-            style={[styles.year2028, styles.camry86FlexBox]}
-            numberOfLines={2}
-          >
-            MPG: 20
-          </Text>
-        </View>
-        <Image
-          style={[styles.checkBoxOutlineBlankIcon, styles.iconLayout]}
-          contentFit="cover"
-          source={require("../assets/check-box-outline-blank.png")}
-        />
-      </View>
+    </View>
+    </View>
+    <ScrollView style={styles.scrollView}>
+      {carArr()}
+    </ScrollView>
     </View>
   );
 };
@@ -249,7 +115,6 @@ const styles = StyleSheet.create({
   },
   itemLayout: {
     height: 84,
-    position: "absolute",
     overflow: "hidden",
   },
   camry86FlexBox: {
@@ -306,38 +171,6 @@ const styles = StyleSheet.create({
     maxHeight: "100%",
     overflow: "hidden",
   },
-  batteryIcon: {
-    right: 0,
-    height: 11,
-    width: 24,
-    top: 0,
-  },
-  wifiIcon: {
-    width: 15,
-    height: 11,
-  },
-  mobileSignalIcon: {
-    width: 17,
-    height: 11,
-  },
-  recordingIndicatorIcon: {
-    top: -9,
-    right: 56,
-    width: 6,
-    height: 6,
-  },
-  rightSide: {
-    top: 17,
-    right: 15,
-    width: 67,
-    height: 11,
-    position: "absolute",
-  },
-  leftSideIcon: {
-    left: 21,
-    width: 54,
-    height: 21,
-  },
   statusBar: {
     height: 44,
     width: 375,
@@ -362,7 +195,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: FontSize.smallText_size,
-    lineHeight: 24,
     textAlign: "left",
     fontFamily: FontFamily.presetsBody2,
     color: Color.colorBlack,
@@ -414,36 +246,6 @@ const styles = StyleSheet.create({
     top: 30,
     left: 309,
     position: "absolute",
-  },
-  item: {
-    top: 174,
-    width: 343,
-    height: 84,
-    left: 16,
-  },
-  item1: {
-    top: 293,
-    width: 343,
-    height: 84,
-    left: 17,
-  },
-  item2: {
-    top: 412,
-    width: 343,
-    height: 84,
-    left: 16,
-  },
-  item3: {
-    top: 531,
-    width: 343,
-    height: 84,
-    left: 16,
-  },
-  item4: {
-    top: 650,
-    width: 343,
-    height: 84,
-    left: 16,
   },
   homeIndicator1: {
     marginLeft: -66.5,
@@ -502,12 +304,21 @@ const styles = StyleSheet.create({
     left: 0,
   },
   search: {
-    width: "100%",
-    height: 812,
+    height: 212,
     overflow: "hidden",
-    flex: 1,
     backgroundColor: Color.colorWhite,
   },
+  search9: {
+    height: 212,
+    overflow: "hidden",
+    backgroundColor: Color.colorWhite,
+  },
+  tile:{
+    padding: 15,
+  },
+  page:{
+    flex:1
+  }
+  
 });
 
-export default Search;
