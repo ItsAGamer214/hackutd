@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 import StartingPage from "./screens/StartingPage";
 import Search from "./screens/Search";
 import Compare from "./screens/Compare";
-import Dashboard from "./screens/Camera";
+import Camera from "./screens/Camera";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -52,8 +52,8 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Tab.Screen
-              name="Dashboard"
-              component={Dashboard}
+              name="Camera"
+              component={Camera}
               options={{ headerShown: false }}
             />
           </Tab.Navigator>
