@@ -6,17 +6,24 @@ import { Padding, Color, Border, FontSize, FontFamily } from "../GlobalStyles";
 export default Camera = () => {
   return (
     <View style={styles.dashboard}>
-      <ImageBackground
-        style={[styles.imageIcon, styles.barLayout]}
-        resizeMode="cover"
-        source={require("../assets/image1.png")}
-      >
-        <View style={[styles.payment, styles.headerPosition]} />
-      </ImageBackground>
+      {
+        <ImageBackground
+          style={[styles.imageIcon, styles.barLayout]}
+          source={require("../assets/image1.png")}
+        ></ImageBackground>
+      }
+      {
+        <ImageBackground
+          style={[styles.imageIconRadio, styles.barLayoutRadio]}
+          source={require("../assets/radioButton.png")}
+          resizeMode="contain"
+        ></ImageBackground>
+      }
+
       <View style={[styles.header, styles.headerPosition]}>
         <Image
           style={[styles.iconchevronLeft, styles.cameraPosition]}
-          contentFit="cover"
+          contentFit="center"
           source={require("../assets/iconchevron-left.png")}
         />
         <Text style={[styles.camera, styles.cameraPosition]}>Camera</Text>
@@ -27,7 +34,11 @@ export default Camera = () => {
 
 const styles = StyleSheet.create({
   barLayout: {
-    width: 375,
+    width: "100%",
+    position: "absolute",
+  },
+  barLayoutRadio: {
+    width: "100%",
     position: "absolute",
   },
   iconPosition1: {
@@ -66,6 +77,7 @@ const styles = StyleSheet.create({
   },
   cameraPosition: {
     marginTop: -12,
+    textAlign: "center",
     top: "50%",
     position: "absolute",
   },
@@ -174,7 +186,7 @@ const styles = StyleSheet.create({
   },
   tabBarItem1: {
     marginLeft: -39.5,
-    opacity: 0.5,
+    opacity: 0.0,
   },
   tabBar: {
     top: 756,
@@ -191,19 +203,18 @@ const styles = StyleSheet.create({
     width: 375,
     backgroundColor: Color.colorWhite,
   },
-  payment: {
-    top: 574,
-    borderRadius: 1,
-    height: 96,
-    opacity: 0.5,
-    backgroundColor: Color.colorBlack,
-  },
   imageIcon: {
-    top: 86,
-    height: 670,
-    left: 0,
-    width: 375,
+    top: "9.3%",
+    height: 760,
+    position: "absolute",
+    bottom: "3%",
     overflow: "hidden",
+    alignItems: "center",
+  },
+  imageIconRadio: {
+    top: "79.5%",
+    height: "34%",
+    position: "absolute",
   },
   iconchevronLeft: {
     left: 16,
@@ -211,7 +222,7 @@ const styles = StyleSheet.create({
     width: 24,
   },
   camera: {
-    marginLeft: -30.5,
+    marginLeft: 0,
     fontSize: FontSize.size_mid,
     letterSpacing: -0.3,
     lineHeight: 24,
@@ -234,4 +245,3 @@ const styles = StyleSheet.create({
     backgroundColor: Color.colorWhite,
   },
 });
-

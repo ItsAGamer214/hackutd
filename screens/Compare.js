@@ -13,52 +13,6 @@ import {
 const Compare = () => {
   return (
     <View style={styles.compare}>
-      <View style={[styles.chart, styles.chartLayout]}>
-        <Image
-          style={[styles.lineIcon, styles.lineIconLayout]}
-          contentFit="cover"
-          source={require("../assets/line.png")}
-        />
-        <Image
-          style={[styles.lineIcon1, styles.lineIconLayout]}
-          contentFit="cover"
-          source={require("../assets/line.png")}
-        />
-        <Image
-          style={[styles.lineIcon2, styles.lineIconLayout]}
-          contentFit="cover"
-          source={require("../assets/line.png")}
-        />
-        <Image
-          style={[styles.lineIcon3, styles.lineIconPosition2]}
-          contentFit="cover"
-          source={require("../assets/line1.png")}
-        />
-        <Image
-          style={[styles.lineIcon4, styles.lineIconPosition1]}
-          contentFit="cover"
-          source={require("../assets/line1.png")}
-        />
-        <Image
-          style={[styles.lineIcon5, styles.lineIconPosition]}
-          contentFit="cover"
-          source={require("../assets/line1.png")}
-        />
-        <View style={[styles.yAxis, styles.yAxisPosition]}>
-          <Text style={[styles.k, styles.mpgTypo]}>200K</Text>
-          <Text style={[styles.mpg, styles.mpgTypo]}>40 MPG</Text>
-          <Text style={[styles.mpg1, styles.mpgTypo]}>30 MPG</Text>
-          <Text style={[styles.mpg2, styles.mpgTypo]}>20 MPG</Text>
-          <Text style={[styles.mpg3, styles.mpgTypo]}>10 MPG</Text>
-        </View>
-        <View style={styles.xAxis}>
-          <Text style={[styles.k, styles.mpgTypo]}>Cars</Text>
-          <Text style={[styles.supra25, styles.mpgTypo]}>Supra ‘25</Text>
-          <Text style={[styles.toyota24, styles.mpgTypo]}>Toyota ‘24</Text>
-          <Text style={[styles.camry24, styles.mpgTypo]}>Camry ‘24</Text>
-        </View>
-        <Text style={[styles.price, styles.priceClr]}>PRICE</Text>
-      </View>
       <View style={[styles.chart1, styles.yAxisPosition]}>
         <Image
           style={[styles.lineIcon, styles.lineIconLayout]}
@@ -104,6 +58,52 @@ const Compare = () => {
           <Text style={[styles.camry24, styles.mpgTypo]}>Camry ‘24</Text>
         </View>
         <Text style={[styles.price, styles.priceClr]}>MPG</Text>
+      </View>
+      <View style={[styles.chart, styles.chartLayout]}>
+        <Image
+          style={[styles.lineIcon, styles.lineIconLayout]}
+          contentFit="cover"
+          source={require("../assets/line.png")}
+        />
+        <Image
+          style={[styles.lineIcon1, styles.lineIconLayout]}
+          contentFit="cover"
+          source={require("../assets/line.png")}
+        />
+        <Image
+          style={[styles.lineIcon2, styles.lineIconLayout]}
+          contentFit="cover"
+          source={require("../assets/line.png")}
+        />
+        <Image
+          style={[styles.lineIcon3, styles.lineIconPosition2]}
+          contentFit="cover"
+          source={require("../assets/line1.png")}
+        />
+        <Image
+          style={[styles.lineIcon4, styles.lineIconPosition1]}
+          contentFit="cover"
+          source={require("../assets/line1.png")}
+        />
+        <Image
+          style={[styles.lineIcon5, styles.lineIconPosition]}
+          contentFit="cover"
+          source={require("../assets/line1.png")}
+        />
+        <View style={[styles.yAxis, styles.yAxisPosition]}>
+          <Text style={[styles.k, styles.mpgTypo]}>200K</Text>
+          <Text style={[styles.mpg, styles.mpgTypo]}>40 MPG</Text>
+          <Text style={[styles.mpg1, styles.mpgTypo]}>30 MPG</Text>
+          <Text style={[styles.mpg2, styles.mpgTypo]}>20 MPG</Text>
+          <Text style={[styles.mpg3, styles.mpgTypo]}>10 MPG</Text>
+        </View>
+        <View style={styles.xAxis}>
+          <Text style={[styles.k, styles.mpgTypo]}>Cars</Text>
+          <Text style={[styles.supra25, styles.mpgTypo]}>Supra ‘25</Text>
+          <Text style={[styles.toyota24, styles.mpgTypo]}>Toyota ‘24</Text>
+          <Text style={[styles.camry24, styles.mpgTypo]}>Camry ‘24</Text>
+        </View>
+        <Text style={[styles.price, styles.priceClr]}>PRICE</Text>
       </View>
       <View style={[styles.locationInfo, styles.infoLayout]}>
         <Image
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     borderColor: Color.colorGainsboro_100,
     borderStyle: "solid",
     borderRadius: Border.br_5xs,
-    overflow: "hidden",
+    overflow: "shown",
     backgroundColor: Color.colorWhite,
   },
   lineIconLayout: {
@@ -211,7 +211,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   homePosition: {
-    left: "50%",
     position: "absolute",
   },
   tabItemPosition: {
@@ -219,7 +218,6 @@ const styles = StyleSheet.create({
     paddingTop: Padding.p_xs,
     paddingHorizontal: Padding.p_7xl,
     flexDirection: "row",
-    left: "50%",
     top: 0,
     position: "absolute",
   },
@@ -301,7 +299,7 @@ const styles = StyleSheet.create({
   },
   xAxis: {
     top: 244,
-    left: 11,
+    left: "5.3%",
     width: 302,
     height: 14,
     position: "absolute",
@@ -317,7 +315,7 @@ const styles = StyleSheet.create({
   },
   chart: {
     top: 659,
-    left: 17,
+    left: "4%",
     position: "absolute",
   },
   notchIcon: {
@@ -327,7 +325,7 @@ const styles = StyleSheet.create({
     left: 78,
     maxWidth: "100%",
     maxHeight: "100%",
-    overflow: "hidden",
+    overflow: "shown",
   },
   batteryIcon: {
     right: 0,
@@ -368,7 +366,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     position: "absolute",
-    overflow: "hidden",
+    overflow: "shown",
   },
   homeIndicator1: {
     marginLeft: -66.5,
@@ -385,7 +383,7 @@ const styles = StyleSheet.create({
     width: 375,
   },
   iconperson: {
-    overflow: "hidden",
+    overflow: "shown",
   },
   tabBarItem: {
     marginLeft: 111.5,
@@ -401,7 +399,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderRadius: Border.br_81xl,
-    overflow: "hidden",
+    overflow: "shown",
   },
   stTrailingIcon: {
     marginTop: -27,
@@ -421,7 +419,7 @@ const styles = StyleSheet.create({
     left: 34,
     top: 12,
     position: "absolute",
-    overflow: "hidden",
+    overflow: "shown",
   },
   tabBarItem1: {
     marginLeft: -39.5,
@@ -451,7 +449,7 @@ const styles = StyleSheet.create({
   lineIcon11: {
     maxHeight: "100%",
   },
-  chart1: {
+chart1: {
     top: 351,
     height: 282,
     width: 343,
@@ -461,10 +459,11 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_5xs,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
-  },
+    position: "relative", // Make sure this is also set
+},
   imageCarouselIcon: {
     height: 150,
-    left: 0,
+    left: "4%",
     top: 0,
     borderRadius: Border.br_5xs,
     width: 344,
@@ -488,6 +487,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   priceCta: {
+    left: "1%",
     justifyContent: "space-between",
     alignSelf: "stretch",
     alignItems: "center",
@@ -495,6 +495,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   productName: {
+    left: "1%",
     alignSelf: "stretch",
     color: Color.colorBlack,
     textAlign: "left",
@@ -502,12 +503,15 @@ const styles = StyleSheet.create({
     fontSize: FontSize.size_sm,
   },
   subheading: {
+
     lineHeight: 20,
     fontSize: FontSize.size_sm,
     fontFamily: FontFamily.presetsBody2,
     color: Color.textTextSecondary,
   },
   rating: {
+
+    left: "2%",
     gap: Gap.gap_sm,
     alignItems: "center",
     flexDirection: "row",
@@ -528,7 +532,7 @@ const styles = StyleSheet.create({
     top: 162,
     gap: 8,
     justifyContent: "center",
-    left: 0,
+    left: "2%",
     backgroundColor: Color.colorWhite,
   },
   locationInfo: {
