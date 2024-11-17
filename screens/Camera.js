@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageIconRadio: {
-    top: "80%",
-    height: 100,
+    top: "79.5%",
+    height: "34%",
     position: "absolute",
   },
   iconchevronLeft: {
