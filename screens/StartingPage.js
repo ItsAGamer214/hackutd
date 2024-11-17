@@ -90,7 +90,7 @@ const StartingPage = () => {
       </View>
 
       <View style={[styles.button, styles.buttonShadowBox]}>
-        <Text style={styles.search2}>Search</Text>
+        <Text style={[styles.search]}>Search</Text>
       </View>
     </View>
   );
