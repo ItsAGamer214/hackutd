@@ -51,7 +51,7 @@ const StartingPage = () => {
         <View style={[styles.shipping, styles.shippingBorder]}>
           <Text style={styles.modelTypo}>MODEL</Text>
           <View style={styles.info1}>
-            <Text style={styles.advancedFilters}>Add shipping address</Text>
+            <Text style={styles.addShippingAddress}>Add shipping address</Text>
             <Image
               style={[styles.iconchevronRight1, styles.iconchevronLayout]}
               contentFit="cover"
@@ -90,13 +90,24 @@ const StartingPage = () => {
       </View>
 
       <View style={[styles.button, styles.buttonShadowBox]}>
-        <Text style={[styles.search]}>Search</Text>
+        <Text style={[styles.search2]}>Search</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  addShippingAddress: {
+    color: Color.textTextSecondary,
+    width: "100%",
+    lineHeight: 20,
+    fontSize: FontSize.size_sm,
+    textAlign: "left",
+    fontFamily: FontFamily.presetsBody2,
+    top: 0,
+    left: 0,
+    position: "relative",
+  },
   iconPosition: {
     top: 12,
     position: "absolute",
@@ -200,9 +211,9 @@ const styles = StyleSheet.create({
   searchIcon: {
     overflow: "hidden",
   },
-  search: {
-    top: 376,
-    width: 343,
+  search2: {
+    top: "41%",
+    width: "90%",
     paddingLeft: Padding.p_xs,
     paddingTop: Padding.p_5xs,
     paddingRight: Padding.p_base,
@@ -211,9 +222,25 @@ const styles = StyleSheet.create({
     backgroundColor: Color.bgBgSecondary,
     alignItems: "center",
     flexDirection: "row",
-    height: 40,
+    height: 50,
     borderRadius: Border.br_5xs,
-    left: 16,
+    left: "5%",
+    position: "absolute",
+  },
+  search: {
+    top: "41%",
+    width: "90%",
+    paddingLeft: Padding.p_xs,
+    paddingTop: Padding.p_5xs,
+    paddingRight: Padding.p_base,
+    gap: Gap.gap_md,
+    paddingBottom: Padding.p_5xs,
+    backgroundColor: Color.bgBgSecondary,
+    alignItems: "center",
+    flexDirection: "row",
+    height: 50,
+    borderRadius: Border.br_5xs,
+    left: "5%",
     position: "absolute",
   },
   advancedFilters: {
@@ -224,12 +251,12 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontFamily: FontFamily.presetsBody2,
     top: 0,
-    left: 0,
-    position: "absolute",
+    left: "19%",
+    position: "relative",
   },
   iconchevronRight: {
     top: -6,
-    left: 112,
+    left: "123%",
     position: "absolute",
   },
   info: {
@@ -241,7 +268,7 @@ const styles = StyleSheet.create({
   },
   image1Icon: {
     top: 161,
-    left: 73,
+    left: "21.5%",
     width: 237,
     height: 178,
     position: "absolute",
@@ -265,7 +292,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   shipping: {
-    alignSelf: "stretch",
+    alignSelf: "",
     padding: Padding.p_base,
   },
   text1: {
@@ -356,7 +383,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginLeft: -135.5,
-    top: 695,
+    top: "83%",
     shadowColor: "rgba(0, 0, 0, 0.05)",
     shadowOffset: {
       width: 0,
@@ -364,12 +391,12 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 2,
     elevation: 2,
-    backgroundColor: "rgba(0, 0, 0, 0.96)",
+    backgroundColor: "rgba(0, 0, 0, 1)",
     width: 258,
-    height: 43,
+    height: 50,
     paddingHorizontal: 24,
     paddingVertical: 14,
-    left: "50%",
+    left: "52%",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
